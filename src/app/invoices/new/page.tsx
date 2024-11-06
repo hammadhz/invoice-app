@@ -5,27 +5,29 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { createAction } from "@/app/actions";
-import { create } from "domain";
 import SubmitButton from "@/components/SubmitButton";
+import Form from "next/form";
 
 const page = () => {
   const [state, setState] = useState("ready");
   async function handleSubmit(e: SyntheticEvent) {
-    e.preventDefault();
-    if (state === "pending") return;
+    if (state === "pending") {
+      e.preventDefault();
+      return;
+    }
     setState("pending");
-    const target = e.target as HTMLFormElement;
-    startTransition(async () => {
-      const formData = new FormData(target);
-      await createAction(formData);
-    });
+    // const target = e.target as HTMLFormElement;
+    // startTransition(async () => {
+    //   const formData = new FormData(target);
+    //   await createAction(formData);
+    // });
   }
   return (
     <main className="flex flex-col justify-center gap-6 h-full  max-w-5xl mx-auto py-12">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold">Create Invoice</h1>
       </div>
-      <form
+      <Form
         action={createAction}
         onSubmit={handleSubmit}
         className="grid gap-4 max-w-xs"
@@ -60,7 +62,7 @@ const page = () => {
         <div>
           <SubmitButton />
         </div>
-      </form>
+      </Form>
     </main>
   );
 };
