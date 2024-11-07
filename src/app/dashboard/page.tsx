@@ -19,11 +19,10 @@ import Container from "@/components/Container";
 
 export default async function Home() {
   const result = await db.select().from(Invoices);
-  console.log(result, "test");
   return (
     <main className=" h-full  py-12">
       <Container>
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-6">
           <h1 className="text-3xl font-bold">Invoices</h1>
           <p>
             <Button className="inline-flex gap-2" variant={"ghost"} asChild>

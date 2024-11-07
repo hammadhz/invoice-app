@@ -6,8 +6,10 @@ const isProctedted = createRouteMatcher([
   "/invoices/new",
 ]);
 
+const isPublic = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+
 export default clerkMiddleware((auth, request) => {
-  if (isProctedted(request)) {
+  if (!isPublic(request)) {
     auth().protect();
   }
 });
